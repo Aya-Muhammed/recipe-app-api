@@ -9,12 +9,12 @@ class UserAdmin(BaseUserAdmin):
     list_display = ['email', 'name']
     feildsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('personal info'), {'feilds': ('name',)}).
+        (_('Personal info'), {'feilds': ('name',)}),
         (
-            _('permissions'),
+            _('Permissions'),
             {'fields': ('is_active', 'is_staff', 'is_superuser')}
         ),
-        (_('important dates'), {'fields': ('last_login',)})
+        (_('Important dates'), {'fields': ('last_login',)})
     )
     add_feildsets = (
         (None, {
