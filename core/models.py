@@ -45,6 +45,4 @@ class Tag(models.Model):
 
     def __init__(self):
         """The string representation for the tag model"""
-        return self.NAME
-
-        
+        return self.name
