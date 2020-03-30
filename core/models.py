@@ -43,6 +43,17 @@ class Tag(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    def __init__(self):
+    def __str__(self):
         """The string representation for the tag model"""
         return self.name
+
+
+class Ingredient(models.Model):
+    """Ingredient to be used in a recipe"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+
+    def __str__(self):
+        """The string representation for the tag model"""
+        return self.name                            
