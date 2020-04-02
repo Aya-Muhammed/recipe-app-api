@@ -4,7 +4,7 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from core.models import Tag, Ingredient, Recipe
-from recipe.serializers import TagSerializer, IngredientSerializer, RecipeSerializer
+from recipe.serializers import TagSerializer, IngredientSerializer, RecipeSerializer, RecipeDetailSerializer, RecipeImageSerializer
 
 
 class BaseRecipeAttrViewSet(viewsets.GenericViewSet,
@@ -48,9 +48,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         """Return appropriate serializer"""
         if self.action == 'retrieve':
-            return serializers.RecipeDetailSerializer
+            return RecipeDetailSerializer
         elif self.action == 'upload_image':
-            return serializers.RecipeImageSerializer
+            return RecipeImageSerializer
 
 
         return self.serializer_class
@@ -63,12 +63,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def upload_image(self, request, pk=None):
         """Upload an image to a recipe"""
         recipe = self.get_object()
-        serializer = self.get_serialzer(
+        serializer = self.get_serializer(
             recipe,
-            data = request.date,
+            data = request.data
         )
 
-        if serializer.is_vaild():
+        if serializer.is_valid():
             serializer.save()
             return Response(
                 serializer.data,
